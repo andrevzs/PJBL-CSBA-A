@@ -1,0 +1,63 @@
+<Bichomon>
+    orientation: 'vertical'
+    Label:
+        text: "Bichomon"
+    Spinner:
+        id: escolhernv
+        text: 'Nivel'
+        values: ['facil', 'dificil']
+        #on_text: root.selecionar_nivel(escolhernv.text)
+    GridLayout:
+        cols: 3
+        Label: 
+            text: "Nome do personagem"
+        TextInput:
+            id: Nome
+            hint_text: "Escreva aqui o nome de seu bichomon"
+            #on_text: root.nomeBichomon()
+        Button:
+            text: "Começar"
+            #on_release: root.começar()
+            background_normal: ''
+            background_color: (0, 1, 0, .5)
+    BoxLayout:
+        id: Historia 
+        canvas:
+            Color: 
+                rgba: 1, 0, 0, .8
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Label:
+            text:"historia"
+            pos_hint: {"center_x": 1, "center_y": 0.5}
+    BoxLayout:
+        id: Dados 
+        canvas:
+            Color: 
+                rgba: 0, 0, 1, .5
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        Label:
+            text:"dados"
+            pos_hint: {"center_x": 1, "center_y": 0.5}
+    BoxLayout:
+        id: Controles 
+        Label:
+            text:"Controle"
+            pos_hint: {"center_x": 1, "center_y": 0.5}
+    GridLayout:
+        cols: 2
+        Button:
+            id: Ataque
+            text: "Atacar"
+            background_normal: ''
+            background_color: (1, 0, 0, .6)
+        Button:
+            id: sorte
+            text: "tentar a sorte"
+            background_normal: ''
+            background_color: (0, 0, 1, .6)
