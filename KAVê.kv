@@ -6,18 +6,17 @@
         id: escolhernv
         text: 'Nivel'
         values: ['facil', 'dificil']
-        #on_text: root.selecionar_nivel(escolhernv.text)
+        on_text: root.dificuldade(escolhernv.text)
     GridLayout:
         cols: 3
         Label: 
             text: "Nome do personagem"
         TextInput:
             id: Nome
-            hint_text: "Escreva aqui o nome de seu bichomon"
-            #on_text: root.nomeBichomon()
+            hint_text: "Escreva aqui o nome de seu heroi"
         Button:
             text: "Começar"
-            #on_release: root.começar()
+            on_release: root.partida()
             background_normal: ''
             background_color: (0, 1, 0, .5)
     BoxLayout:
@@ -30,6 +29,7 @@
                 pos: self.pos
 
         Label:
+            id: hist
             text:"historia"
             pos_hint: {"center_x": 1, "center_y": 0.5}
     BoxLayout:
@@ -61,3 +61,4 @@
             text: "tentar a sorte"
             background_normal: ''
             background_color: (0, 0, 1, .6)
+
