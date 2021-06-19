@@ -6,7 +6,7 @@
         id: escolhernv
         text: 'Nivel'
         values: ['facil', 'dificil']
-        on_text: root.dificuldade(escolhernv.text)
+        on_text: root.dificuldade_spinner(escolhernv.text)
     GridLayout:
         cols: 3
         Label: 
@@ -16,7 +16,7 @@
             hint_text: "Escreva aqui o nome de seu heroi"
         Button:
             text: "Começar"
-            on_release: root.partida()
+            on_release: root.botão_começar()
             background_normal: ''
             background_color: (0, 1, 0, .5)
     BoxLayout:
@@ -42,7 +42,7 @@
                 pos: self.pos
 
         Label:
-            text:"dados"
+            text:"Dados personagem"
             pos_hint: {"center_x": 1, "center_y": 0.5}
     BoxLayout:
         id: Controles 
@@ -56,9 +56,9 @@
             text: "Atacar"
             background_normal: ''
             background_color: (1, 0, 0, .6)
+            on_release: root.teste()
         Button:
             id: sorte
             text: "tentar a sorte"
             background_normal: ''
             background_color: (0, 0, 1, .6)
-
