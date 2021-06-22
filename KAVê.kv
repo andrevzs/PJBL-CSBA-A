@@ -21,6 +21,7 @@
             background_color: (0, 1, 0, .5)
     BoxLayout:
         id: Historia 
+        size_hint_y: 3
         canvas:
             Color: 
                 rgba: 1, 0, 0, .8
@@ -34,18 +35,27 @@
             pos_hint: {"center_x": 1, "center_y": 0.5}
     BoxLayout:
         id: Dados 
+        size_hint_y: 5
         canvas:
             Color: 
                 rgba: 0, 0, 1, .5
             Rectangle:
                 size: self.size
                 pos: self.pos
-
-        Label:
-            text:"Dados personagem"
-            pos_hint: {"center_x": 1, "center_y": 0.5}
+        GridLayout:
+            cols: 3
+            Label:
+                id: aliado
+                text: ""
+            Label:
+                id: inicio-texto
+                text:"Dados personagem"
+            Label:
+                id: inimigo
+                text: ""
     BoxLayout:
         id: Controles 
+        size_hint_y: 0.3
         Label:
             text:"Controle"
             pos_hint: {"center_x": 1, "center_y": 0.5}
@@ -56,9 +66,10 @@
             text: "Atacar"
             background_normal: ''
             background_color: (1, 0, 0, .6)
-            on_release: root.teste()
+            on_release: root.ataque(), root.info()
         Button:
             id: sorte
             text: "tentar a sorte"
             background_normal: ''
             background_color: (0, 0, 1, .6)
+            on_release: root.sorte(), root.info()
