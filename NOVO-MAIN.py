@@ -26,9 +26,9 @@ class Banco:#Serve para pegar todas as informações que a gente vai precisar do
         self.cursor.close()
 
     def recuperaListaBicho(self, cod):
-        if cod == 5 or cod == 6:
+        if cod == 5 or cod == 6 or cod == 9 or cod == 10:
             cod = 1
-        if cod == 4 or cod == 3 or cod == 7:
+        if cod == 4 or cod == 3 or cod == 7 or cod == 8:
             cod = 2
         self.cursor.execute(f"SELECT * FROM BICHO WHERE CODHISTORIA = {cod};")
         bichos = self.cursor.fetchall()#Recupera a lista de bichos de acordo com a dificuldade
@@ -150,13 +150,11 @@ class Partida:
     
 class Historia:
     def __init__(self, *list):
-        sorteio = randint(0, 1)
-        print("Sorteio lista=", sorteio)
+        sorteio = randint(0, 4)
         self.cod = list[0][sorteio][0]
         self.intro = list[0][sorteio][1]
         self.difi = list[0][sorteio][2]
     def exibeIntro(self, nome):
-        print(self.intro)
         self.intro = self.intro.replace("[personagem]", nome)
         return self.cod, self.intro , self.difi
 class Bichomon(BoxLayout):
