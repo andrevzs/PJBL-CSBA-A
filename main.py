@@ -40,7 +40,7 @@ class Banco:
     def recuperaListaBicho(self, cod):
         if cod == 5 or cod == 6 or cod == 9 or cod == 10:
             cod = 1
-        else:
+        if cod == 3 or cod == 4 or cod == 7 or cod == 8:
             cod = 2
         self.cursor.execute(f"SELECT * FROM BICHO WHERE CODHISTORIA = {cod};")
         
@@ -180,8 +180,7 @@ class Partida:
             if self.vidaInimigo <= 0:
                 return print(f"{self.inimigos.nome} morreu após sofrer {self.danoHeroi} de dano por {self.nome}" ) 
             
-            return print(f"""Dano dado pelo heroi {self.nome}: {self.danoHeroi}, vida: {self.vidaHeroi}\n
-            Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, vida: {self.vidaInimigo}""")
+            return print(f"Dano dado pelo heroi {self.nome}: {self.danoHeroi}, vida: {self.vidaHeroi}\nDano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, vida: {self.vidaInimigo}")
         
         else:  # Tentou a sorte
             self.result = self.heroi.critico()
@@ -196,8 +195,7 @@ class Partida:
                 if self.vidaInimigo <= 0:
                     return print(f"{self.inimigos.nome} morreu após sofrer {self.danoHeroi} de dano critico por {self.nome}" )
                 else:
-                    return print(f"""Dano critico dado pelo heroi {self.nome}: {self.danoHeroi}, vida: {self.vidaHeroi}\n
-                    Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, vida: {self.vidaInimigo}""")
+                    return print(f"Dano critico dado pelo heroi {self.nome}: {self.danoHeroi}, vida: {self.vidaHeroi}\nDano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, vida: {self.vidaInimigo}")
             
             else: # Vai se curar
                 self.cura = self.heroi.sofreDano(int(-self.result[0]))#menos para somar ao inves de subtrair
@@ -210,9 +208,7 @@ class Partida:
                 if self.vidaHeroi <= 0:
                     return print(f"{self.nome} morreu após sofrer {self.danoInimigo} de dano de {self.inimigos.nome}")
                 else:
-                    return print(f"""{self.result[0]} de vida regenerada pelo heroi {self.nome}, 
-                    vida: {self.vidaHeroi}\n
-                    Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, o bichomon nao levou dano""")
+                    return print(f"{self.result[0]} de vida regenerada pelo heroi {self.nome}, vida: {self.vidaHeroi}\nDano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, o bichomon nao levou dano")
 
 
 # Sorteio e exibicao da historia
@@ -232,7 +228,7 @@ class Historia:
 class Bichomon(BoxLayout):
     def dificuldade_spinner(self, nv):
         self.nivel = nv
-        if self.nivel == "facil":
+        if self.nivel == "Fácil":
             self.nivel  = 3
         else:
             self.nivel  = 4
@@ -249,9 +245,9 @@ class Bichomon(BoxLayout):
             self.ids["hist"].text = "Escolha a dificuldade"
             return
 
-        self.cod = self.historia[0]
+        self.cod   = self.historia[0]
         self.intro = self.historia[1]
-        self.tipo = self.historia[2]
+        self.tipo  = self.historia[2]
 
         if self.nome == '':
             self.ids["hist"].text = "Erro, você não digitou seu nome"
@@ -264,8 +260,8 @@ class Bichomon(BoxLayout):
         
         self.ids["hist"].text= self.intro
         self.ids["inicio-texto"].text = ''
-        self.ids['aliado'].text       = f"Heroi:\nNome:{self.nome}\nVida: 175\nDano: 40-20"
-        self.ids['inimigo'].text      = "Bichomon:\nNome:???????\nVida:???????\nDano:???????"
+        self.ids['aliado'].text       = f"HERÓI\nNome:{self.nome}\nVida: 175\nDano: 40-20"
+        self.ids['inimigo'].text      = "BICHO\nNome:???????\nVida:???????\nDano:???????"
 
         self.ids["Ataque"].disabled = False
         self.ids['sorte'].disabled  = False
@@ -279,12 +275,12 @@ class Bichomon(BoxLayout):
     def info(self):
         self.vervida = Personagem(self.nome)
         try:
-            self.ids['aliado'].text         = f"Heroi:\nNome:{self.nome}\nVida: {self.ir.vidaHeroi}\nDano:{self.ir.danoHeroi}"
-            self.ids['inimigo'].text        = f"Bichomon:\nNome:{self.ir.inimigos.nome}\nVida:{self.ir.vidaInimigo}\nDano:{self.ir.danoInimigo}"
+            self.ids['aliado'].text         = f"HERÓI\nNome:{self.nome}\nVida: {self.ir.vidaHeroi}\nDano:{self.ir.danoHeroi}"
+            self.ids['inimigo'].text        = f"BICHO\nNome:{self.ir.inimigos.nome}\nVida:{self.ir.vidaInimigo}\nDano:{self.ir.danoInimigo}"
         
         except AttributeError:
-            self.ids['aliado'].text         = f"Heroi:\nNome:{self.nome}\nVida: {self.ir.vidaHeroi}\nDano: 0"
-            self.ids['inimigo'].text        = f"Bichomon:\nNome:{self.ir.inimigos.nome}\nVida:???????\nDano:{self.ir.danoInimigo}"
+            self.ids['aliado'].text         = f"HERÓI\nNome:{self.nome}\nVida: {self.ir.vidaHeroi}\nDano: 0"
+            self.ids['inimigo'].text        = f"BICHO\nNome:{self.ir.inimigos.nome}\nVida:???????\nDano:{self.ir.danoInimigo}"
         
         if self.ir.vidaHeroi < 0:
             self.ids['aliado'].text         = ''
