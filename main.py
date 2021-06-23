@@ -180,10 +180,8 @@ class Partida:
             if self.vidaInimigo <= 0:
                 return print(f"{self.inimigos.nome} morreu após sofrer {self.danoHeroi} de dano por {self.nome}" ) 
             
-            return print(f"""Dano dado pelo heroi {self.nome}: {self.danoHeroi}, 
-            vida: {self.vidaHeroi}\n
-            Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, 
-            vida: {self.vidaInimigo}""")
+            return print(f"""Dano dado pelo heroi {self.nome}: {self.danoHeroi}, vida: {self.vidaHeroi}\n
+            Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, vida: {self.vidaInimigo}""")
         
         else:  # Tentou a sorte
             self.result = self.heroi.critico()
@@ -198,10 +196,8 @@ class Partida:
                 if self.vidaInimigo <= 0:
                     return print(f"{self.inimigos.nome} morreu após sofrer {self.danoHeroi} de dano critico por {self.nome}" )
                 else:
-                    return print(f"""Dano critico dado pelo heroi {self.nome}: {self.danoHeroi}, 
-                    vida: {self.vidaHeroi}\n
-                    Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, 
-                    vida: {self.vidaInimigo}""")
+                    return print(f"""Dano critico dado pelo heroi {self.nome}: {self.danoHeroi}, vida: {self.vidaHeroi}\n
+                    Dano dado pelo bichomon {self.inimigos.nome}: {self.danoInimigo}, vida: {self.vidaInimigo}""")
             
             else: # Vai se curar
                 self.cura = self.heroi.sofreDano(int(-self.result[0]))#menos para somar ao inves de subtrair
@@ -247,10 +243,10 @@ class Bichomon(BoxLayout):
         self.nome       = self.ids["Nome"].text
         self.banco      = Banco()
         try:
-            self.texto = self.banco.recuperaDadosHistoria(self.nivel)
+            self.texto    = self.banco.recuperaDadosHistoria(self.nivel)
             self.historia = Historia(self.texto).exibeIntro(self.nome)
         except AttributeError:
-            self.ids["hist"].text="Escolha a dificuldade"
+            self.ids["hist"].text = "Escolha a dificuldade"
             return
 
         self.cod = self.historia[0]
@@ -270,6 +266,9 @@ class Bichomon(BoxLayout):
         self.ids["inicio-texto"].text = ''
         self.ids['aliado'].text       = f"Heroi:\nNome:{self.nome}\nVida: 175\nDano: 40-20"
         self.ids['inimigo'].text      = "Bichomon:\nNome:???????\nVida:???????\nDano:???????"
+
+        self.ids["Ataque"].disabled = False
+        self.ids['sorte'].disabled  = False
 
     def ataque(self):
         self.ir.ExecutaTurnoPartida("ataque")
@@ -291,15 +290,15 @@ class Bichomon(BoxLayout):
             self.ids['aliado'].text         = ''
             self.ids['inimigo'].text        = ''
             self.ids['inicio-texto'].text   = "É uma pena, você perdeu"
-            self.ids["Ataque"].disabled = True
-            self.ids['sorte'].disabled = True
+            self.ids["Ataque"].disabled     = True
+            self.ids['sorte'].disabled      = True
         
         if self.ir.ordem == 5:
             self.ids['aliado'].text         = ''
             self.ids['inimigo'].text        = ''
             self.ids['inicio-texto'].text   = "Parabens, Você venceu!"
-            self.ids["Ataque"].disabled = True
-            self.ids['sorte'].disabled = True
+            self.ids["Ataque"].disabled     = True
+            self.ids['sorte'].disabled      = True
     
 class PJBLApp(App):
     def build(self):
