@@ -246,15 +246,19 @@ class Bichomon(BoxLayout):
         self.banco.VoltarVidas()
         self.nome       = self.ids["Nome"].text
         self.banco      = Banco()
-        self.texto      = self.banco.recuperaDadosHistoria(self.nivel)
-        self.historia   = Historia(self.texto).exibeIntro(self.nome)
+        try:
+            self.texto = self.banco.recuperaDadosHistoria(self.nivel)
+            self.historia = Historia(self.texto).exibeIntro(self.nome)
+        except AttributeError:
+            self.ids["hist"].text="Escolha a dificuldade"
+            return
 
-        self.cod        = self.historia[0]
-        self.intro      = self.historia[1]
-        self.tipo       = self.historia[2]
+        self.cod = self.historia[0]
+        self.intro = self.historia[1]
+        self.tipo = self.historia[2]
 
-        if self.nome == '' or self.tipo == '':
-            self.ids["hist"].text = "Erro, você não digitou seu nome e/ou esqueceu de selecionar a dificuldade"
+        if self.nome == '':
+            self.ids["hist"].text = "Erro, você não digitou seu nome"
             return
         else:pass
         
@@ -287,12 +291,15 @@ class Bichomon(BoxLayout):
             self.ids['aliado'].text         = ''
             self.ids['inimigo'].text        = ''
             self.ids['inicio-texto'].text   = "É uma pena, você perdeu"
+            self.ids["Ataque"].disabled = True
+            self.ids['sorte'].disabled = True
         
         if self.ir.ordem == 5:
             self.ids['aliado'].text         = ''
             self.ids['inimigo'].text        = ''
             self.ids['inicio-texto'].text   = "Parabens, Você venceu!"
-
+            self.ids["Ataque"].disabled = True
+            self.ids['sorte'].disabled = True
     
 class PJBLApp(App):
     def build(self):
