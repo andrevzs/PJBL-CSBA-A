@@ -4,7 +4,7 @@
     Label:
         text: "~ BICHOMON ~"
         font_size: 32
-        background_color: (29/255, 53/255, 87/255, 1)
+        background_color: (23/255, 42/255, 69/255, 1)
         canvas.before:
 			Color:
 				rgba: self.background_color
@@ -15,9 +15,14 @@
 		bold: True
     Spinner:
         id: escolhernv
-        text: 'Nível'
+        text: '> Dificuldade <'
         values: ['Fácil', 'Difícil']
         on_text: root.dificuldade_spinner(escolhernv.text)
+        background_normal: ''
+        background_down: ''
+        background_color: 29/255, 53/255, 87/255, 1
+        color: 241/255, 250/255, 238/255, 1
+        bold: True
     GridLayout:
         cols: 3
         Label: 
@@ -33,7 +38,14 @@
 				    pos: self.pos
         TextInput:
             id: Nome
-            hint_text: "Escreva aqui o nome de seu heroi"
+            hint_text: "Escreva aqui o nome de seu herói"
+            multiline: False
+            foreground_color: 29/255, 53/255, 87/255, 1
+            background_active: ''
+            background_normal: ''
+            background_color: 241/255, 250/255, 238/255, 1
+            halign: "center"
+            padding_y: [18, 0]
         Button:
             text: "COMEÇAR"
             bold: True
@@ -56,6 +68,10 @@
             text:"História"
             pos_hint: {"center_x": 1, "center_y": 0.5}
             italic: True
+            size_hint_y: None
+            text_size: (self.width*2)/3, None
+            height: self.texture_size[1]
+            halign: "center"
     BoxLayout:
         id: Dados 
         size_hint_y: 5
